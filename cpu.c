@@ -82,7 +82,7 @@ int runPCB(PCB* currentPCB)
 
 			if (foundVictimPCB==0)
 			{
-				//printf("Error! Victim Frame PCB not found!\n");
+				printf("Error! Victim Frame PCB not found!\n");
 				exit(EXIT_SUCCESS);
 			}
 

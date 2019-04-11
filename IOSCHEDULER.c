@@ -32,16 +32,23 @@ int hasHardDiskMounted()
 
 void IOMounter(char* partitionName, int number_of_blocks, int block_size)
 {
+	printf("calling io moutner!\n");
 	if(hasHardDiskMounted() != -1) // has a hardisk currently mounted
 	{
 		saveToDiskAndDisconnect();
 	}
+
 	partition(partitionName, number_of_blocks, block_size); // if already exist wouldn't do anything
 	mount(partitionName);
 }
 
 int IOWriteScheduler(char* data, char* filename, PCB *ptr)
 {
+	if(hasHardDiskMounted() == -1)
+	{
+		printf("No partition found!\n");
+		return 1;
+	}
 	int fatIndex  = openfile(filename); 
 	if (fatIndex == -1) // file name not found
 	{
@@ -56,9 +63,12 @@ int IOWriteScheduler(char* data, char* filename, PCB *ptr)
 	if (fatIndex == -2)
 	{
 		printf("Error! fp is full to open file: %s\n",filename );
+		return 1;
 	}
 
+	printf("IOWriteScheduler found index to be %d\n",fatIndex);
 	int writeResult = writeBlock(fatIndex, data); // its error message shall be boardcasted in DISK_driver, do not have time to copy them to here
+	return 1;
 }
 
 
@@ -69,6 +79,7 @@ int IOReadscheduler(char* data, PCB *ptr)
 
 	if(hasHardDiskMounted() == -1)
 	{
+		printf("No partition found!\n");
 		return -1;
 	}
 	
@@ -76,12 +87,19 @@ int IOReadscheduler(char* data, PCB *ptr)
 	int openResult = openfile(data);
 	if (openResult < 0) // error, most likely file doesn't exist
 	{
+		printf("File not found!\n");
 		return -1;
 	}
 	else
 	{
-		return 1;
+		int result= readBlock(openResult);
+		return result;
 	}	
+}
+
+void IOSave()
+{
+	saveToDiskAndDisconnect();
 }
 
 int IOScheduler(char* data, PCB *ptr, int cmd)

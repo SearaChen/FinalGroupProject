@@ -25,12 +25,15 @@ int help()
 int quit()
 {
 	printf("Bye!\n");
+	IOSave();
 	//free(cpu);
 	exit(EXIT_SUCCESS);
 }
 
 int set(char* varName, char* value) // set VAR STRING
 {
+	printf("value in set read: %s\n",value);
+
 	writeToMemory(varName, value);
 	return 1;
 }
@@ -151,19 +154,11 @@ int writeInterpreter(int commandWordCount,char ** args)
 int readInterpreter(char* filename, char*variableName)
 {
 	int IOResult=IOReadscheduler(filename, NULL);
-	if(IOResult == -1)
-	{
-		printf("Cannot find file: %s ",filename);
-	}
-	else if(IOResult == -2)
-	{
-		printf("No mounted partition found!");
-	}
-	else
+	if(IOResult>=0)
 	{
 		char* resultData = getBufferResult();
 		printf("result data from read: %s\n",resultData);
-		//resultData+='\0'; // add end character in case ?? 
+		printf("variableName: %s\n", variableName);
 		set(variableName, resultData);
 
 	}
@@ -222,7 +217,7 @@ int interpret(char **args)
 		status= exec(commandWordCount, args);
 		return status;
 	}
-	else if(strcmp(args[0],"Mount") == 0 && commandWordCount ==4) //• Mount partitionName number_of_blocks block_size
+	else if(strcmp(args[0],"Mount") == 0 )//&& commandWordCount ==4) //• Mount partitionName number_of_blocks block_size
 	{
 		int number_of_blocks = strtol(args[2], NULL, 20);
 		int block_size = strtol(args[3], NULL, 20);
@@ -244,7 +239,8 @@ int interpret(char **args)
 	}
 	else if(strcmp(args[0],"Read") == 0 && commandWordCount == 3)// Read filename variable
 	{
-		status = readInterpreter(args[1],args[0]);
+		status = readInterpreter(args[1],args[2]);
+		//"EXO","bestband");
 		return status;
 	}
 	else

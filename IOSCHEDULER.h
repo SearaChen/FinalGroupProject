@@ -8,4 +8,5 @@ void IOMounter(char* partitionName, int number_of_blocks, int block_size);
 int IOWriteScheduler(char* data, char* filename, PCB *ptr);
 int IOReadscheduler(char* data, PCB *ptr);
 int IOScheduler(char* data, PCB *ptr, int cmd);
+void IOSave();
 #endif
