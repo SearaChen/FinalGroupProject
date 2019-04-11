@@ -33,7 +33,6 @@ int quit()
 int set(char* varName, char* value) // set VAR STRING
 {
 	printf("value in set read: %s\n",value);
-
 	writeToMemory(varName, value);
 	return 1;
 }
@@ -126,27 +125,6 @@ int writeInterpreter(int commandWordCount,char ** args)
 		strcpy(data, args[i]);
 	}
 	IOWriteScheduler(data,filename,NULL);
-	// // check if it is already open 
-	// if(fatIndex == -1) // not open yet
-	// {
-	// 	fatIndex  = openFile(filename); 
-	// 	if (fatIndex == -1) // no such filename
-	// 	{
-	// 		fatIndex = createFile(filename);
-	// 		if (fatIndex == -1)  // fat is full
-	// 		{
-	// 			printf("Error! FAT is full to create file: %s", filename);
-	// 		}
-	// 		fatIndex  = openFile(filename); 
-	// 	}
-
-	// 	if (fatIndex == -2)
-	// 	{
-	// 		printf("Error! fp is full to open file: %s\n",filename );
-	// 	}
-	// }
-
-	// writeBlock(fatIndex, data);
 	return 1;
 }
 
@@ -217,7 +195,7 @@ int interpret(char **args)
 		status= exec(commandWordCount, args);
 		return status;
 	}
-	else if(strcmp(args[0],"Mount") == 0 )//&& commandWordCount ==4) //• Mount partitionName number_of_blocks block_size
+	else if(strcmp(args[0],"Mount") == 0 && commandWordCount ==4) //• Mount partitionName number_of_blocks block_size
 	{
 		int number_of_blocks = strtol(args[2], NULL, 20);
 		int block_size = strtol(args[3], NULL, 20);
