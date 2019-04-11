@@ -1,0 +1,9 @@
+Mount test.txt 2 2
+Read BTS x
+Write EXO XIUMIN
+print x
+Mount test2.txt 2 2
+Mount test.txt 2 2
+Read EXO x
+print x
+quit
