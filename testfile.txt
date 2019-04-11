@@ -1,0 +1,10 @@
+exec test1.txt test2.txt test3.txt
+set a bts
+set haha lol
+print haha 
+exec testadfa
+exec test2.txt test3.txt test2.txt
+exec tde test2.txt
+help
+print a
+quit

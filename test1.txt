@@ -1,0 +1,20 @@
+set a 1a
+print a 
+set a 1aa
+print a 
+set b 1b
+print b
+set b 1bb
+print b
+set c 1c
+print c 
+set c 1cc
+print c 
+set d 1d
+print d
+set d 1dd
+print d
+set e 1e
+print e
+set e 1ee
+print e
