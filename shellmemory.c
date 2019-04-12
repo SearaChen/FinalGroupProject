@@ -37,16 +37,17 @@ void writeToMemory(char* inputVariableName, char* inputValue)
 	printf("Starting to write to memory!\n");
 	printf("inputVariableName: %s\n", inputVariableName);//newNode->name);
 	printf("inputValue: %s\n", inputValue);//newNode->value);
-	char temp[500];
-	strcpy(temp,inputValue); // without this doesnt work!!
-	printf("copied temp: %s", temp);
+	//char temp[500];
+	//strcpy(temp,inputValue); // without this doesnt work!!
+	//printf("copied temp: %s", temp);
 
 	while(current != (Node*)NULL) // comparison making it segfault
 	{
 		if (strcmp(current->name,inputVariableName) == 0 )
 		{
 			free(current->value);
-			current->value =(char *) malloc(sizeof(char)*strlen(temp)+5);
+			//current->value =(char *) malloc(sizeof(char)*strlen(temp)+5);
+			current->value =(char *) malloc(sizeof(char)*strlen(inputValue)+5);
 			strcpy(current->value ,inputValue);
 			return;
 		}
@@ -63,8 +64,8 @@ void writeToMemory(char* inputVariableName, char* inputValue)
 
     strcpy(newNode->name ,inputVariableName);
 	
-	newNode->value =(char *) malloc(sizeof(char)*strlen(temp)+5);
-	strcpy(newNode->value ,temp);
+	newNode->value =(char *) malloc(sizeof(char)*strlen(inputValue)+5);
+	strcpy(newNode->value ,inputValue);
 
 	printf("setting memory value:\n");
 	printf("inputVariableName: %s\n", newNode->name);

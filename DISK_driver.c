@@ -619,7 +619,7 @@ int readBlock(int fileFATIndex)
 
 char *returnBlock()
 {// PURPOSE : return block data as string from block_buffer
-	char resultString[PARTITION->total_blocks*PARTITION->block_size]; 
+	char* resultString = malloc(PARTITION->total_blocks*PARTITION->block_size); 
 	int i=0;
 	while(i < PARTITION->total_blocks*PARTITION->block_size)
 	{
