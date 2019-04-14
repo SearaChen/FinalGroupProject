@@ -29,6 +29,7 @@ void printMemory(Node* current)
 	printf("-----------------------\n");
 }
 
+
 void writeToMemory(char* inputVariableName, char* inputValue)
 {
 	Node* current = Head;
